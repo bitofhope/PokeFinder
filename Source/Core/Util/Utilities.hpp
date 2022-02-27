@@ -1,6 +1,6 @@
 /*
  * This file is part of PokéFinder
- * Copyright (C) 2017-2021 by Admiral_Fish, bumba, and EzPzStreamz
+ * Copyright (C) 2017-2022 by Admiral_Fish, bumba, and EzPzStreamz
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,14 +26,22 @@
 class DateTime;
 class HGSSRoamer;
 
-namespace Utilities
+namespace Utilities3
 {
-    u16 calcGen3Seed(const DateTime &dateTime);
-    u32 calcGen4Seed(const DateTime &dateTime, u32 delay);
+    u16 calcSeed(const DateTime &dateTime);
+}
+
+namespace Utilities4
+{
+    u32 calcSeed(const DateTime &dateTime, u32 delay);
     std::string coinFlips(u32 seed);
     std::string getCalls(u32 seed, const HGSSRoamer &info);
     std::string getChatot(u32 seed);
-    std::string getChatot64(u32 seed);
+}
+
+namespace Utilities5
+{
+    std::string getChatot(u32 seed);
     u32 initialAdvancesBW(u64 seed);
     u32 initialAdvancesBW2(u64 seed, bool memory);
     u32 initialAdvancesBWID(u64 seed);

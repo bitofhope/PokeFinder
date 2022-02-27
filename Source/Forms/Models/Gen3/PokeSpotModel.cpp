@@ -1,6 +1,6 @@
 /*
  * This file is part of PokéFinder
- * Copyright (C) 2017-2021 by Admiral_Fish, bumba, and EzPzStreamz
+ * Copyright (C) 2017-2022 by Admiral_Fish, bumba, and EzPzStreamz
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -56,11 +56,11 @@ QVariant PokeSpotModel::data(const QModelIndex &index, int role) const
                 return tr("Rare");
             }
         case 4:
-            return QString::fromStdString(Translator::getNature(state.getNature()));
+            return QString::fromStdString(*Translator::getNature(state.getNature()));
         case 5:
             return state.getAbility();
         case 6:
-            return QString::fromStdString(Translator::getGender(state.getGender()));
+            return QString::fromStdString(*Translator::getGender(state.getGender()));
         }
     }
     return QVariant();

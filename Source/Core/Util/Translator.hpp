@@ -1,6 +1,6 @@
 /*
  * This file is part of PokéFinder
- * Copyright (C) 2017-2021 by Admiral_Fish, bumba, and EzPzStreamz
+ * Copyright (C) 2017-2022 by Admiral_Fish, bumba, and EzPzStreamz
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,18 +30,19 @@ enum class Game : u32;
 namespace Translator
 {
     void init(const std::string &locale);
-    std::vector<std::string> getCharacteristic();
-    std::vector<std::string> getNatures();
-    std::string getNature(u8 nature);
-    std::string getAbility(u16 ability);
-    std::vector<std::string> getHiddenPowers();
-    std::string getHiddenPower(u8 power);
-    std::string getSpecies(u16 specie);
+    std::vector<std::string> *getCharacteristic();
+    std::string *getCharacteristic(u8 characteristic);
+    std::vector<std::string> *getNatures();
+    std::string *getNature(u8 nature);
+    std::string *getAbility(u16 ability);
+    std::vector<std::string> *getHiddenPowers();
+    std::string *getHiddenPower(u8 power);
+    std::string *getSpecies(u16 specie);
     std::vector<std::string> getSpecies(const std::vector<u16> &nums);
-    std::string getGender(u8 gender);
-    std::vector<std::string> getGenders();
+    std::string *getGender(u8 gender);
+    std::vector<std::string> *getGenders();
     std::vector<std::string> getLocations(const std::vector<u16> &nums, Game game);
-    std::string getKeypress(u8 keypress);
+    std::string *getKeypress(u8 keypress);
     std::string getKeypresses(Buttons keypresses);
 }
 

@@ -1,6 +1,6 @@
 /*
  * This file is part of PokéFinder
- * Copyright (C) 2017-2021 by Admiral_Fish, bumba, and EzPzStreamz
+ * Copyright (C) 2017-2022 by Admiral_Fish, bumba, and EzPzStreamz
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,6 +18,7 @@
  */
 
 #include "EventGenerator5.hpp"
+#include <Core/Parents/States/State.hpp>
 #include <Core/RNG/LCRNG64.hpp>
 #include <Core/Util/Utilities.hpp>
 
@@ -73,7 +74,7 @@ std::vector<State> EventGenerator5::generate(u64 seed) const
         if (parameters.getGender() == 0 || parameters.getGender() == 1)
         {
             u64 rand = go.nextUInt();
-            pid = Utilities::forceGender(pid, rand, parameters.getGender(), genderRatio);
+            pid = Utilities5::forceGender(pid, rand, parameters.getGender(), genderRatio);
             state.setGender(parameters.getGender());
         }
         else

@@ -1,6 +1,6 @@
 /*
  * This file is part of PokéFinder
- * Copyright (C) 2017-2021 by Admiral_Fish, bumba, and EzPzStreamz
+ * Copyright (C) 2017-2022 by Admiral_Fish, bumba, and EzPzStreamz
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,10 +20,11 @@
 #ifndef STATIC8_HPP
 #define STATIC8_HPP
 
-#include <QMenu>
-#include <Core/Gen8/Profile8.hpp>
+#include <QWidget>
 
+class Profile8;
 class StaticModel8;
+class QMenu;
 
 namespace Ui
 {
@@ -44,9 +45,9 @@ public:
 private:
     Ui::Static8 *ui;
     std::vector<Profile8> profiles;
-    Profile8 currentProfile;
-    StaticModel8 *model = nullptr;
-    QMenu *menu = nullptr;
+    Profile8 *currentProfile;
+    StaticModel8 *model;
+    QMenu *menu;
 
     void setupModels();
 

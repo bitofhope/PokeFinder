@@ -1,6 +1,6 @@
 /*
  * This file is part of PokéFinder
- * Copyright (C) 2017-2021 by Admiral_Fish, bumba, and EzPzStreamz
+ * Copyright (C) 2017-2022 by Admiral_Fish, bumba, and EzPzStreamz
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,14 +21,14 @@
 #define STATICSEARCHER3_HPP
 
 #include <Core/Parents/Searchers/StaticSearcher.hpp>
-#include <Core/Parents/States/State.hpp>
 #include <Core/RNG/RNGCache.hpp>
 #include <mutex>
+
+class State;
 
 class StaticSearcher3 : public StaticSearcher
 {
 public:
-    StaticSearcher3() = default;
     StaticSearcher3(u16 tid, u16 sid, u8 genderRatio, Method method, const StateFilter &filter);
     void startSearch(const std::array<u8, 6> &min, const std::array<u8, 6> &max);
     void cancelSearch();

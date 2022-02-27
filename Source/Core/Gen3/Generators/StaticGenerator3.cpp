@@ -1,6 +1,6 @@
 /*
  * This file is part of PokéFinder
- * Copyright (C) 2017-2021 by Admiral_Fish, bumba, and EzPzStreamz
+ * Copyright (C) 2017-2022 by Admiral_Fish, bumba, and EzPzStreamz
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,11 +19,11 @@
 
 #include "StaticGenerator3.hpp"
 #include <Core/Enum/Method.hpp>
-#include <Core/Parents/Filters/StateFilter.hpp>
+#include <Core/Parents/States/State.hpp>
 #include <Core/RNG/LCRNG.hpp>
 
 StaticGenerator3::StaticGenerator3(u32 initialAdvances, u32 maxAdvances, u16 tid, u16 sid, u8 genderRatio, Method method,
-                                           const StateFilter &filter) :
+                                   const StateFilter &filter) :
     StaticGenerator(initialAdvances, maxAdvances, tid, sid, genderRatio, method, filter)
 {
 }

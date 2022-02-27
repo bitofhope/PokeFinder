@@ -1,6 +1,6 @@
 /*
  * This file is part of PokéFinder
- * Copyright (C) 2017-2021 by Admiral_Fish, bumba, and EzPzStreamz
+ * Copyright (C) 2017-2022 by Admiral_Fish, bumba, and EzPzStreamz
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
 #include "Filter.hpp"
 #include "ui_Filter.h"
 #include <Core/Util/Translator.hpp>
-#include <array>
+#include <Forms/Controls/Controls.hpp>
 
 Filter::Filter(QWidget *parent) : QWidget(parent), ui(new Ui::Filter)
 {
@@ -29,8 +29,8 @@ Filter::Filter(QWidget *parent) : QWidget(parent), ui(new Ui::Filter)
     ui->comboBoxAbility->setup({ 255, 0, 1 });
     ui->comboBoxGender->setup({ 255, 0, 1 });
     ui->comboBoxGenderRatio->setup({ 255, 127, 191, 63, 31, 0, 254 });
-    ui->checkListHiddenPower->setup(Translator::getHiddenPowers());
-    ui->checkListNature->setup(Translator::getNatures());
+    ui->checkListHiddenPower->setup(*Translator::getHiddenPowers());
+    ui->checkListNature->setup(*Translator::getNatures());
     ui->comboBoxShiny->setup({ 255, 1, 2, 3 });
     ui->textBoxDelay->setValues(InputType::Advance32Bit);
 

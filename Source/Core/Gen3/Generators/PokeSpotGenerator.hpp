@@ -1,6 +1,6 @@
 /*
  * This file is part of PokéFinder
- * Copyright (C) 2017-2021 by Admiral_Fish, bumba, and EzPzStreamz
+ * Copyright (C) 2017-2022 by Admiral_Fish, bumba, and EzPzStreamz
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,13 +20,13 @@
 #ifndef POKESPOTGENERATOR_HPP
 #define POKESPOTGENERATOR_HPP
 
-#include <Core/Gen3/States/GameCubeState.hpp>
 #include <Core/Parents/Generators/Generator.hpp>
+
+class GameCubeState;
 
 class PokeSpotGenerator : public Generator
 {
 public:
-    PokeSpotGenerator() = default;
     PokeSpotGenerator(u32 initialAdvances, u32 maxAdvances, u16 tid, u16 sid, u8 genderRatio, const StateFilter &filter);
     std::vector<GameCubeState> generate(u32 seed, const std::vector<bool> &spots) const;
 };

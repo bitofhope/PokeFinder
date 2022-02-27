@@ -1,6 +1,6 @@
 /*
  * This file is part of PokéFinder
- * Copyright (C) 2017-2021 by Admiral_Fish, bumba, and EzPzStreamz
+ * Copyright (C) 2017-2022 by Admiral_Fish, bumba, and EzPzStreamz
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,7 +18,7 @@
  */
 
 #include "TinyMT.hpp"
-#include <cstring>
+#include <Core/RNG/SIMD.hpp>
 
 TinyMT::TinyMT(u32 seed) : state { seed, 0x8f7011ee, 0xfc78ff1f, 0x3793fdff }
 {
@@ -41,9 +41,9 @@ TinyMT::TinyMT(u32 seed) : state { seed, 0x8f7011ee, 0xfc78ff1f, 0x3793fdff }
     }
 }
 
-TinyMT::TinyMT(const u32 state[])
+TinyMT::TinyMT(const u32 *state)
 {
-    std::memcpy(this->state, state, sizeof(this->state));
+    v32x4_store(&this->state[0], v32x4_load(state));
 }
 
 void TinyMT::advance(u32 advances)

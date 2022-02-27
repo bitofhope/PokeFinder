@@ -1,6 +1,6 @@
 /*
  * This file is part of PokéFinder
- * Copyright (C) 2017-2021 by Admiral_Fish, bumba, and EzPzStreamz
+ * Copyright (C) 2017-2022 by Admiral_Fish, bumba, and EzPzStreamz
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,6 +22,7 @@
 #include <Core/Parents/ProfileLoader.hpp>
 #include <Forms/Gen5/Profile/ProfileEditor5.hpp>
 #include <Forms/Models/Gen5/ProfileModel5.hpp>
+#include <QMessageBox>
 
 ProfileManager5::ProfileManager5(QWidget *parent) : QWidget(parent), ui(new Ui::ProfileManager5)
 {
@@ -50,7 +51,7 @@ void ProfileManager5::setupModels()
 
 void ProfileManager5::create()
 {
-    QScopedPointer<ProfileEditor5> dialog(new ProfileEditor5);
+    std::unique_ptr<ProfileEditor5> dialog(new ProfileEditor5);
     if (dialog->exec() == QDialog::Accepted)
     {
         Profile5 profile = dialog->getNewProfile();
@@ -72,7 +73,7 @@ void ProfileManager5::edit()
         return;
     }
 
-    QScopedPointer<ProfileEditor5> dialog(new ProfileEditor5(model->getItem(row)));
+    std::unique_ptr<ProfileEditor5> dialog(new ProfileEditor5(model->getItem(row)));
     if (dialog->exec() == QDialog::Accepted)
     {
         Profile5 profile = dialog->getNewProfile();

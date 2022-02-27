@@ -1,6 +1,6 @@
 /*
  * This file is part of PokéFinder
- * Copyright (C) 2017-2021 by Admiral_Fish, bumba, and EzPzStreamz
+ * Copyright (C) 2017-2022 by Admiral_Fish, bumba, and EzPzStreamz
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -52,7 +52,7 @@ QVariant DreamRadarGeneratorModel5::data(const QModelIndex &index, int role) con
             return shiny == 2 ? tr("Square") : shiny == 1 ? tr("Star") : tr("No");
         }
         case 5:
-            return QString::fromStdString(Translator::getNature(state.getNature()));
+            return QString::fromStdString(*Translator::getNature(state.getNature()));
         case 6:
         {
             u8 ability = state.getAbility();
@@ -70,11 +70,11 @@ QVariant DreamRadarGeneratorModel5::data(const QModelIndex &index, int role) con
         case 12:
             return state.getIV(static_cast<u8>(column - 7));
         case 13:
-            return QString::fromStdString(Translator::getHiddenPower(state.getHidden()));
+            return QString::fromStdString(*Translator::getHiddenPower(state.getHidden()));
         case 14:
             return state.getPower();
         case 15:
-            return QString::fromStdString(Translator::getGender(state.getGender()));
+            return QString::fromStdString(*Translator::getGender(state.getGender()));
         }
     }
     return QVariant();
@@ -219,7 +219,7 @@ QVariant DreamRadarSearcherModel5::data(const QModelIndex &index, int role) cons
             return shiny == 2 ? tr("Square") : shiny == 1 ? tr("Star") : tr("No");
         }
         case 5:
-            return QString::fromStdString(Translator::getNature(state.getNature()));
+            return QString::fromStdString(*Translator::getNature(state.getNature()));
         case 6:
         {
             u8 ability = state.getAbility();
@@ -237,11 +237,11 @@ QVariant DreamRadarSearcherModel5::data(const QModelIndex &index, int role) cons
         case 12:
             return state.getIV(static_cast<u8>(column - 7));
         case 13:
-            return QString::fromStdString(Translator::getHiddenPower(state.getHidden()));
+            return QString::fromStdString(*Translator::getHiddenPower(state.getHidden()));
         case 14:
             return state.getPower();
         case 15:
-            return QString::fromStdString(Translator::getGender(state.getGender()));
+            return QString::fromStdString(*Translator::getGender(state.getGender()));
         case 16:
             return QString::fromStdString(display.getDateTime().toString());
         case 17:

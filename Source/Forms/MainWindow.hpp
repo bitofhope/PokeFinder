@@ -1,6 +1,6 @@
 /*
  * This file is part of PokéFinder
- * Copyright (C) 2017-2021 by Admiral_Fish, bumba, and EzPzStreamz
+ * Copyright (C) 2017-2022 by Admiral_Fish, bumba, and EzPzStreamz
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,13 +20,7 @@
 #ifndef MAINWINDOW_HPP
 #define MAINWINDOW_HPP
 
-#include <QActionGroup>
 #include <QMainWindow>
-
-namespace Ui
-{
-    class MainWindow;
-}
 
 class Static3;
 class Wild3;
@@ -49,6 +43,12 @@ class Event8;
 class Raids;
 class Eggs8;
 class IDs8;
+class QActionGroup;
+
+namespace Ui
+{
+    class MainWindow;
+}
 
 class MainWindow : public QMainWindow
 {

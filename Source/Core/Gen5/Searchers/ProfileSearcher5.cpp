@@ -1,6 +1,6 @@
 /*
  * This file is part of PokéFinder
- * Copyright (C) 2017-2021 by Admiral_Fish, bumba, and EzPzStreamz
+ * Copyright (C) 2017-2022 by Admiral_Fish, bumba, and EzPzStreamz
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,9 +20,11 @@
 #include "ProfileSearcher5.hpp"
 #include <Core/Enum/Game.hpp>
 #include <Core/Gen5/Keypresses.hpp>
+#include <Core/Gen5/States/ProfileSearcherState5.hpp>
 #include <Core/RNG/LCRNG64.hpp>
 #include <Core/RNG/MTFast.hpp>
 #include <Core/RNG/SHA1.hpp>
+#include <Core/Util/DateTime.hpp>
 #include <Core/Util/Utilities.hpp>
 #include <future>
 
@@ -188,7 +190,7 @@ bool ProfileNeedleSearcher5::valid(u64 seed)
 {
     BWRNG rng(seed);
 
-    u8 advances = game ? Utilities::initialAdvancesBW(seed) : Utilities::initialAdvancesBW2(seed, memoryLink);
+    u8 advances = game ? Utilities5::initialAdvancesBW(seed) : Utilities5::initialAdvancesBW2(seed, memoryLink);
 
     // Opening the menu advances 1
     if (unovaLink)

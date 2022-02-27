@@ -1,6 +1,6 @@
 /*
  * This file is part of PokéFinder
- * Copyright (C) 2017-2021 by Admiral_Fish, bumba, and EzPzStreamz
+ * Copyright (C) 2017-2022 by Admiral_Fish, bumba, and EzPzStreamz
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,13 +20,14 @@
 #ifndef IDGENERATOR3_HPP
 #define IDGENERATOR3_HPP
 
-#include <Core/Gen3/States/IDState3.hpp>
+#include <Core/Parents/Filters/IDFilter.hpp>
 #include <Core/Parents/Generators/IDGenerator.hpp>
 
-class IDGenerator3 : public IDGenerator<>
+class IDState3;
+
+class IDGenerator3 : public IDGenerator<IDFilter>
 {
 public:
-    IDGenerator3() = default;
     IDGenerator3(u32 initialAdvances, u32 maxAdvances, const IDFilter &filter);
     std::vector<IDState3> generateXDColo(u32 seed);
     std::vector<IDState3> generateFRLGE(u16 tid);

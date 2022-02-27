@@ -1,6 +1,6 @@
 /*
  * This file is part of PokéFinder
- * Copyright (C) 2017-2021 by Admiral_Fish, bumba, and EzPzStreamz
+ * Copyright (C) 2017-2022 by Admiral_Fish, bumba, and EzPzStreamz
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -61,7 +61,7 @@ void ProfileManager4::setupModels()
 
 void ProfileManager4::create()
 {
-    QScopedPointer<ProfileEditor4> dialog(new ProfileEditor4);
+    std::unique_ptr<ProfileEditor4> dialog(new ProfileEditor4);
     if (dialog->exec() == QDialog::Accepted)
     {
         Profile4 profile = dialog->getNewProfile();
@@ -82,7 +82,7 @@ void ProfileManager4::edit()
         return;
     }
 
-    QScopedPointer<ProfileEditor4> dialog(new ProfileEditor4(model->getItem(row)));
+    std::unique_ptr<ProfileEditor4> dialog(new ProfileEditor4(model->getItem(row)));
     if (dialog->exec() == QDialog::Accepted)
     {
         Profile4 profile = dialog->getNewProfile();

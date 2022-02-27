@@ -1,6 +1,6 @@
 /*
  * This file is part of PokéFinder
- * Copyright (C) 2017-2021 by Admiral_Fish, bumba, and EzPzStreamz
+ * Copyright (C) 2017-2022 by Admiral_Fish, bumba, and EzPzStreamz
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,14 +21,14 @@
 #define HGSSROAMER_HPP
 
 #include <Core/Util/Global.hpp>
+#include <array>
 #include <string>
-#include <vector>
 
 class HGSSRoamer
 {
 public:
     HGSSRoamer() = default;
-    HGSSRoamer(u32 seed, const std::vector<bool> &roamers, const std::vector<u8> &routes);
+    HGSSRoamer(u32 seed, const std::array<bool, 3> &roamers, const std::array<u8, 3> &routes);
     u8 getSkips() const;
     std::string getRouteString() const;
     void recalculateRoamers(u32 seed);
@@ -43,8 +43,8 @@ private:
     u8 enteiRoute;
     u8 latiRoute;
     u32 seed;
-    std::vector<bool> roamers;
-    std::vector<u8> routes;
+    std::array<bool, 3> roamers;
+    std::array<u8, 3> routes;
 };
 
 #endif // HGSSROAMER_HPP

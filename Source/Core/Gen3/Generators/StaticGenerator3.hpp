@@ -1,6 +1,6 @@
 /*
  * This file is part of PokéFinder
- * Copyright (C) 2017-2021 by Admiral_Fish, bumba, and EzPzStreamz
+ * Copyright (C) 2017-2022 by Admiral_Fish, bumba, and EzPzStreamz
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,12 +21,12 @@
 #define STATICGENERATOR3_HPP
 
 #include <Core/Parents/Generators/StaticGenerator.hpp>
-#include <Core/Parents/States/State.hpp>
+
+class State;
 
 class StaticGenerator3 : public StaticGenerator
 {
 public:
-    StaticGenerator3() = default;
     StaticGenerator3(u32 initialAdvances, u32 maxAdvances, u16 tid, u16 sid, u8 genderRatio, Method method, const StateFilter &filter);
     std::vector<State> generate(u32 seed) const;
 

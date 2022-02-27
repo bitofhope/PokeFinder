@@ -1,6 +1,6 @@
 /*
  * This file is part of PokéFinder
- * Copyright (C) 2017-2021 by Admiral_Fish, bumba, and EzPzStreamz
+ * Copyright (C) 2017-2022 by Admiral_Fish, bumba, and EzPzStreamz
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,11 +20,11 @@
 #ifndef ENCOUNTERAREA_HPP
 #define ENCOUNTERAREA_HPP
 
-#include <Core/Parents/Slot.hpp>
 #include <Core/Util/Global.hpp>
 #include <string>
 #include <vector>
 
+class Slot;
 enum class Encounter : u8;
 
 class EncounterArea

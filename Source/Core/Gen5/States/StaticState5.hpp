@@ -1,6 +1,6 @@
 /*
  * This file is part of PokéFinder
- * Copyright (C) 2017-2021 by Admiral_Fish, bumba, and EzPzStreamz
+ * Copyright (C) 2017-2022 by Admiral_Fish, bumba, and EzPzStreamz
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,14 +20,11 @@
 #ifndef STATICSTATE5_HPP
 #define STATICSTATE5_HPP
 
-#include <Core/Gen5/States/State5.hpp>
 #include <Core/Parents/States/StaticState.hpp>
 
-class StaticState5 : public State5, public StaticState
+class StaticState5 : public StaticState
 {
 public:
-    StaticState5() = default;
-
     explicit StaticState5(u32 advance) : StaticState(advance)
     {
     }

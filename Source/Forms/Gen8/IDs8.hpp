@@ -1,6 +1,6 @@
 /*
  * This file is part of PokéFinder
- * Copyright (C) 2017-2021 by Admiral_Fish, bumba, and EzPzStreamz
+ * Copyright (C) 2017-2022 by Admiral_Fish, bumba, and EzPzStreamz
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,10 +20,10 @@
 #ifndef IDS8_HPP
 #define IDS8_HPP
 
-#include <Core/Gen8/Profile8.hpp>
 #include <QWidget>
 
 class IDModel8;
+class Profile8;
 
 namespace Ui
 {

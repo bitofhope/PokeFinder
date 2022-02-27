@@ -1,6 +1,6 @@
 /*
  * This file is part of PokéFinder
- * Copyright (C) 2017-2021 by Admiral_Fish, bumba, and EzPzStreamz
+ * Copyright (C) 2017-2022 by Admiral_Fish, bumba, and EzPzStreamz
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,11 +20,12 @@
 #ifndef EVENT8_HPP
 #define EVENT8_HPP
 
-#include <Core/Gen8/WB8.hpp>
-#include <Core/Gen8/Profile8.hpp>
-#include <QMenu>
+#include <QWidget>
 
 class EventModel8;
+class Profile8;
+class WB8;
+class QMenu;
 
 namespace Ui
 {
@@ -44,10 +45,10 @@ public:
 
 private:
     Ui::Event8 *ui;
-    EventModel8 *model = nullptr;
+    EventModel8 *model;
     std::vector<Profile8> profiles;
-    Profile8 currentProfile;
-    QMenu *menu = nullptr;
+    Profile8 *currentProfile;
+    QMenu *menu;
 
     void setupModels();
     WB8 getParameters() const;

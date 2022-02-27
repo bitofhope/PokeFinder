@@ -1,6 +1,6 @@
 /*
  * This file is part of PokéFinder
- * Copyright (C) 2017-2021 by Admiral_Fish, bumba, and EzPzStreamz
+ * Copyright (C) 2017-2022 by Admiral_Fish, bumba, and EzPzStreamz
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,11 +20,11 @@
 #ifndef EGGS3_HPP
 #define EGGS3_HPP
 
-#include <Core/Gen3/Profile3.hpp>
-#include <QMenu>
 #include <QWidget>
 
 class EggModel3;
+class Profile3;
+class QMenu;
 
 namespace Ui
 {
@@ -45,13 +45,13 @@ public:
 private:
     Ui::Eggs3 *ui;
     std::vector<Profile3> profiles;
-    Profile3 currentProfile;
-    EggModel3 *emerald = nullptr;
-    EggModel3 *rs = nullptr;
-    EggModel3 *frlg = nullptr;
-    QMenu *emeraldMenu = nullptr;
-    QMenu *rsMenu = nullptr;
-    QMenu *frlgMenu = nullptr;
+    Profile3 *currentProfile;
+    EggModel3 *emerald;
+    EggModel3 *rs;
+    EggModel3 *frlg;
+    QMenu *emeraldMenu;
+    QMenu *rsMenu;
+    QMenu *frlgMenu;
 
     void setupModels();
 

@@ -1,6 +1,6 @@
 /*
  * This file is part of PokéFinder
- * Copyright (C) 2017-2021 by Admiral_Fish, bumba, and EzPzStreamz
+ * Copyright (C) 2017-2022 by Admiral_Fish, bumba, and EzPzStreamz
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -64,7 +64,7 @@ void JirachiPattern::generate()
 
     u32 seed = ui->textBoxSeed->getUInt();
 
-    std::vector<std::string> patterns = JirachiPatternCalculator::getPatterns(seed);
+    auto patterns = JirachiPatternCalculator::getPatterns(seed);
     if (patterns.empty())
     {
         model->appendRow(new QStandardItem(tr("Spread Impossible")));

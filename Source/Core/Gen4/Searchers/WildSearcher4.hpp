@@ -1,6 +1,6 @@
 /*
  * This file is part of PokéFinder
- * Copyright (C) 2017-2021 by Admiral_Fish, bumba, and EzPzStreamz
+ * Copyright (C) 2017-2022 by Admiral_Fish, bumba, and EzPzStreamz
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,14 +22,14 @@
 
 #include <Core/Gen4/EncounterArea4.hpp>
 #include <Core/Parents/Searchers/WildSearcher.hpp>
-#include <Core/Parents/States/WildState.hpp>
 #include <Core/RNG/RNGCache.hpp>
 #include <mutex>
+
+class WildState;
 
 class WildSearcher4 : public WildSearcher
 {
 public:
-    WildSearcher4() = default;
     WildSearcher4(u16 tid, u16 sid, u8 genderRatio, Method method, const StateFilter &filter);
     void setEncounterArea(const EncounterArea4 &encounterArea);
     void setDelay(u32 minDelay, u32 maxDelay);

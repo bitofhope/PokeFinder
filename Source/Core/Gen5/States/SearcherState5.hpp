@@ -1,6 +1,6 @@
 /*
  * This file is part of PokéFinder
- * Copyright (C) 2017-2021 by Admiral_Fish, bumba, and EzPzStreamz
+ * Copyright (C) 2017-2022 by Admiral_Fish, bumba, and EzPzStreamz
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,13 +21,11 @@
 #define EVENTSTATE5_HPP
 
 #include <Core/Gen5/States/State5.hpp>
-#include <Core/Parents/States/State.hpp>
 
-template <typename StateType>
+template <class StateType>
 class SearcherState5 : public State5
 {
 public:
-    SearcherState5() = default;
     SearcherState5(const DateTime &dt, u64 initialSeed, Buttons buttons, u16 timer0, const StateType &state) :
         State5(dt, initialSeed, buttons, timer0), state(state)
     {

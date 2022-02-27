@@ -1,6 +1,6 @@
 /*
  * This file is part of PokéFinder
- * Copyright (C) 2017-2021 by Admiral_Fish, bumba, and EzPzStreamz
+ * Copyright (C) 2017-2022 by Admiral_Fish, bumba, and EzPzStreamz
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,8 +25,6 @@
 class IDState8 : public IDState
 {
 public:
-    IDState8() = default;
-
     IDState8(u32 advance, u16 tid, u16 sid, u32 g8tid) : IDState(advance, tid, sid), g8tid(g8tid)
     {
         tsv = (tid ^ sid) >> 4;

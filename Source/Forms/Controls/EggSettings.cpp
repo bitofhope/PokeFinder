@@ -1,6 +1,6 @@
 /*
  * This file is part of PokéFinder
- * Copyright (C) 2017-2021 by Admiral_Fish, bumba, and EzPzStreamz
+ * Copyright (C) 2017-2022 by Admiral_Fish, bumba, and EzPzStreamz
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,6 +20,7 @@
 #include "EggSettings.hpp"
 #include "ui_EggSettings.h"
 #include <Core/Enum/Game.hpp>
+#include <Core/Parents/Daycare.hpp>
 #include <Core/Util/Translator.hpp>
 
 EggSettings::EggSettings(QWidget *parent) : QWidget(parent), ui(new Ui::EggSettings)
@@ -185,7 +186,7 @@ bool EggSettings::reorderParents()
         ui->spinBoxParentASpe->setValue(daycare.getParentIV(1, 5));
         ui->comboBoxParentAAbility->setCurrentIndex(daycare.getParentAbility(1));
         ui->comboBoxParentAGender->setCurrentIndex(daycare.getParentGender(1));
-        ui->comboBoxParentAItem->setCurrentIndex(daycare.getParentItem(1));
+        ui->comboBoxParentAItem->setCurrentIndex(ui->comboBoxParentAItem->findData(daycare.getParentItem(1)));
         ui->comboBoxParentANature->setCurrentIndex(daycare.getParentNature(1));
 
         ui->spinBoxParentBHP->setValue(daycare.getParentIV(0, 0));
@@ -196,7 +197,7 @@ bool EggSettings::reorderParents()
         ui->spinBoxParentBSpe->setValue(daycare.getParentIV(0, 5));
         ui->comboBoxParentBAbility->setCurrentIndex(daycare.getParentAbility(0));
         ui->comboBoxParentBGender->setCurrentIndex(daycare.getParentGender(0));
-        ui->comboBoxParentBItem->setCurrentIndex(daycare.getParentItem(0));
+        ui->comboBoxParentBItem->setCurrentIndex(ui->comboBoxParentBItem->findData(daycare.getParentItem(0)));
         ui->comboBoxParentBNature->setCurrentIndex(daycare.getParentNature(0));
     }
 
@@ -205,7 +206,7 @@ bool EggSettings::reorderParents()
 
 void EggSettings::setupModels()
 {
-    for (const std::string &nature : Translator::getNatures())
+    for (const std::string &nature : *Translator::getNatures())
     {
         ui->comboBoxParentANature->addItem(QString::fromStdString(nature));
         ui->comboBoxParentBNature->addItem(QString::fromStdString(nature));
@@ -213,11 +214,11 @@ void EggSettings::setupModels()
 
     for (u8 i = 0; i < 3; i++)
     {
-        ui->comboBoxParentAGender->addItem(QString::fromStdString(Translator::getGender(i)));
-        ui->comboBoxParentBGender->addItem(QString::fromStdString(Translator::getGender(i)));
+        ui->comboBoxParentAGender->addItem(QString::fromStdString(*Translator::getGender(i)));
+        ui->comboBoxParentBGender->addItem(QString::fromStdString(*Translator::getGender(i)));
     }
-    ui->comboBoxParentAGender->addItem(QString::fromStdString(Translator::getSpecies(132)));
-    ui->comboBoxParentBGender->addItem(QString::fromStdString(Translator::getSpecies(132)));
+    ui->comboBoxParentAGender->addItem(QString::fromStdString(*Translator::getSpecies(132)));
+    ui->comboBoxParentBGender->addItem(QString::fromStdString(*Translator::getSpecies(132)));
 
     ui->comboBoxParentAAbility->addItem("1");
     ui->comboBoxParentAAbility->addItem("2");
@@ -225,10 +226,10 @@ void EggSettings::setupModels()
     ui->comboBoxParentBAbility->addItem("1");
     ui->comboBoxParentBAbility->addItem("2");
 
-    ui->comboBoxParentAItem->addItem(tr("None"));
+    ui->comboBoxParentAItem->addItem(tr("None"), 0);
     ui->comboBoxParentAItem->addItem(tr("Everstone"), 1);
 
-    ui->comboBoxParentBItem->addItem(tr("None"));
+    ui->comboBoxParentBItem->addItem(tr("None"), 0);
     ui->comboBoxParentBItem->addItem(tr("Everstone"), 1);
 
     connect(ui->checkBoxShowInheritance, &QCheckBox::clicked, this, &EggSettings::toggleInheritance);

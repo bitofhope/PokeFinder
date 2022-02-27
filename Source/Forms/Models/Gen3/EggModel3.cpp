@@ -1,6 +1,6 @@
 /*
  * This file is part of PokéFinder
- * Copyright (C) 2017-2021 by Admiral_Fish, bumba, and EzPzStreamz
+ * Copyright (C) 2017-2022 by Admiral_Fish, bumba, and EzPzStreamz
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -76,7 +76,7 @@ QVariant EggModel3::data(const QModelIndex &index, int role) const
             return shiny == 2 ? tr("Square") : shiny == 1 ? tr("Star") : tr("No");
         }
         case 6:
-            return QString::fromStdString(Translator::getNature(state.getNature()));
+            return QString::fromStdString(*Translator::getNature(state.getNature()));
         case 7:
             return state.getAbility();
         case 8:
@@ -95,11 +95,11 @@ QVariant EggModel3::data(const QModelIndex &index, int role) const
             }
             return state.getIV(static_cast<u8>(column - 8));
         case 14:
-            return QString::fromStdString(Translator::getHiddenPower(state.getHidden()));
+            return QString::fromStdString(*Translator::getHiddenPower(state.getHidden()));
         case 15:
             return state.getPower();
         case 16:
-            return QString::fromStdString(Translator::getGender(state.getGender()));
+            return QString::fromStdString(*Translator::getGender(state.getGender()));
         }
     }
 

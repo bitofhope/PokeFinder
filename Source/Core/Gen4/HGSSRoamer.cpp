@@ -1,6 +1,6 @@
 /*
  * This file is part of PokéFinder
- * Copyright (C) 2017-2021 by Admiral_Fish, bumba, and EzPzStreamz
+ * Copyright (C) 2017-2022 by Admiral_Fish, bumba, and EzPzStreamz
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
 #include "HGSSRoamer.hpp"
 #include <Core/RNG/LCRNG.hpp>
 
-HGSSRoamer::HGSSRoamer(u32 seed, const std::vector<bool> &roamers, const std::vector<u8> &routes) :
+HGSSRoamer::HGSSRoamer(u32 seed, const std::array<bool, 3> &roamers, const std::array<u8, 3> &routes) :
     seed(seed), roamers(roamers), routes(routes)
 {
     calculateRoamers();

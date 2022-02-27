@@ -1,6 +1,6 @@
 /*
  * This file is part of PokéFinder
- * Copyright (C) 2017-2021 by Admiral_Fish, bumba, and EzPzStreamz
+ * Copyright (C) 2017-2022 by Admiral_Fish, bumba, and EzPzStreamz
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -93,6 +93,10 @@ constexpr std::array<StaticTemplate, 6> ramanasParkStrangeSpace = {
     StaticTemplate(Game::BDSP, 382, 70, 3), // Kyogre
     StaticTemplate(Game::BDSP, 383, 70, 3), // Groudon
     StaticTemplate(Game::BDSP, 384, 70, 3) // Rayquaza
+};
+
+constexpr std::array<StaticTemplate, 1> mythics = {
+    StaticTemplate(Game::BDSP, 492, 30, 3)
 };
 
 namespace Encounters8
@@ -306,13 +310,21 @@ namespace Encounters8
             }
             return ramanasParkPureSpace.data();
         }
-        else
+        else if (index == 6)
         {
             if (size)
             {
                 *size = ramanasParkStrangeSpace.size();
             }
             return ramanasParkStrangeSpace.data();
+        }
+        else
+        {
+            if(size)
+            {
+                *size = mythics.size();
+            }
+            return mythics.data();
         }
     }
 }

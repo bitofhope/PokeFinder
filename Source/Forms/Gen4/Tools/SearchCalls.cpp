@@ -1,6 +1,6 @@
 /*
  * This file is part of PokéFinder
- * Copyright (C) 2017-2021 by Admiral_Fish, bumba, and EzPzStreamz
+ * Copyright (C) 2017-2022 by Admiral_Fish, bumba, and EzPzStreamz
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,21 +19,15 @@
 
 #include "SearchCalls.hpp"
 #include "ui_SearchCalls.h"
+#include <Core/Gen4/SeedTime.hpp>
 #include <Core/Util/Utilities.hpp>
 #include <QSettings>
-#include <algorithm>
 
-SearchCalls::SearchCalls(const std::vector<SeedTime> &model, const std::vector<bool> &roamers, const std::vector<u8> &routes,
-                         QWidget *parent) :
-    QDialog(parent), ui(new Ui::SearchCalls)
+SearchCalls::SearchCalls(const std::vector<SeedTime> &model, QWidget *parent) : QDialog(parent), ui(new Ui::SearchCalls), data(model)
 {
     ui->setupUi(this);
     setAttribute(Qt::WA_QuitOnClose, false);
 
-    this->roamers = roamers;
-    this->routes = routes;
-
-    data = model;
     ui->labelPossibleResults->setText(tr("Possible Results: ") + QString::number(model.size()));
 
     connect(ui->pushButtonE, &QPushButton::clicked, this, &SearchCalls::e);

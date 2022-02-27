@@ -1,6 +1,6 @@
 /*
  * This file is part of PokéFinder
- * Copyright (C) 2017-2021 by Admiral_Fish, bumba, and EzPzStreamz
+ * Copyright (C) 2017-2022 by Admiral_Fish, bumba, and EzPzStreamz
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,12 +21,12 @@
 #define EGGGENERATOR8_HPP
 
 #include <Core/Parents/Generators/EggGenerator.hpp>
-#include <Core/Parents/States/EggState.hpp>
+
+class EggState;
 
 class EggGenerator8 : public EggGenerator
 {
 public:
-    EggGenerator8() = default;
     EggGenerator8(u32 initialAdvances, u32 maxAdvances, u16 tid, u16 sid, u8 genderRatio, const StateFilter &filter, const Daycare &daycare,
                   bool shinyCharm, u8 compatability);
     std::vector<EggState> generate(u64 seed0, u64 seed1) const;

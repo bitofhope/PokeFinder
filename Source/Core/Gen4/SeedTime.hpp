@@ -1,6 +1,6 @@
 /*
  * This file is part of PokéFinder
- * Copyright (C) 2017-2021 by Admiral_Fish, bumba, and EzPzStreamz
+ * Copyright (C) 2017-2022 by Admiral_Fish, bumba, and EzPzStreamz
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,8 +28,7 @@ enum class Game : u32;
 class SeedTime
 {
 public:
-    SeedTime() = default;
-    SeedTime(const DateTime &dateTime, u32 delay, Game version, const std::vector<bool> &roamers, const std::vector<u8> &routes);
+    SeedTime(const DateTime &dateTime, u32 delay, Game version, const std::array<bool, 3> &roamers, const std::array<u8, 3> &routes);
     SeedTime(const DateTime &dateTime, u32 delay, Game version, const HGSSRoamer &info);
     std::string getSequence() const;
     u32 getSeed() const;

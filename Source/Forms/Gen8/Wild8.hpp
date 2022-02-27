@@ -1,6 +1,6 @@
 /*
  * This file is part of PokéFinder
- * Copyright (C) 2017-2021 by Admiral_Fish, bumba, and EzPzStreamz
+ * Copyright (C) 2017-2022 by Admiral_Fish, bumba, and EzPzStreamz
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,11 +20,12 @@
 #ifndef WILD8_HPP
 #define WILD8_HPP
 
-#include <Core/Gen8/EncounterArea8.hpp>
-#include <Core/Gen8/Profile8.hpp>
-#include <QMenu>
+#include <QWidget>
 
+class EncounterArea8;
+class Profile8;
 class WildModel8;
+class QMenu;
 
 namespace Ui
 {
@@ -46,9 +47,9 @@ public:
 private:
     Ui::Wild8 *ui;
     std::vector<Profile8> profiles;
-    Profile8 currentProfile;
-    WildModel8 *model = nullptr;
-    QMenu *menu = nullptr;
+    Profile8 *currentProfile;
+    WildModel8 *model;
+    QMenu *menu;
     std::vector<EncounterArea8> encounters;
 
     void setupModels();

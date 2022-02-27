@@ -1,6 +1,6 @@
 /*
  * This file is part of PokéFinder
- * Copyright (C) 2017-2021 by Admiral_Fish, bumba, and EzPzStreamz
+ * Copyright (C) 2017-2022 by Admiral_Fish, bumba, and EzPzStreamz
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,6 +22,7 @@
 #include <Core/Enum/Method.hpp>
 #include <Core/Parents/PersonalInfo.hpp>
 #include <Core/Parents/PersonalLoader.hpp>
+#include <Core/Parents/States/StaticState.hpp>
 #include <Core/Parents/StaticTemplate.hpp>
 #include <Core/RNG/RNGList.hpp>
 #include <Core/RNG/Xoroshiro.hpp>
@@ -111,14 +112,12 @@ std::vector<StaticState> StaticGenerator8::generate(u64 seed0, u64 seed1, const 
             }
         }
 
+        u8 ability = rngList.getValue() % 2;
         if (parameters.getAbility() != 255)
         {
-            state.setAbility(parameters.getAbility());
+            ability = parameters.getAbility();
         }
-        else
-        {
-            state.setAbility(rngList.getValue() % 2);
-        }
+        state.setAbility(ability);
 
         if (info.getGender() == 255)
         {

@@ -1,6 +1,6 @@
 /*
  * This file is part of PokéFinder
- * Copyright (C) 2017-2021 by Admiral_Fish, bumba, and EzPzStreamz
+ * Copyright (C) 2017-2022 by Admiral_Fish, bumba, and EzPzStreamz
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,7 +25,6 @@
 class EggState : public State
 {
 public:
-    EggState() = default;
     explicit EggState(u32 advance) : State(advance), inheritance { 0, 0, 0, 0, 0, 0 }
     {
     }

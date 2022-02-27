@@ -1,6 +1,6 @@
 /*
  * This file is part of PokéFinder
- * Copyright (C) 2017-2021 by Admiral_Fish, bumba, and EzPzStreamz
+ * Copyright (C) 2017-2022 by Admiral_Fish, bumba, and EzPzStreamz
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,8 +26,8 @@
 
 namespace IVChecker
 {
-    std::vector<std::vector<u8>> calculateIVRange(const std::array<u8, 6> &baseStats, const std::vector<std::vector<u16>> &stats,
-                                                  const std::vector<u8> &level, u8 nature, u8 characteristic, u8 hiddenPower);
+    std::array<std::vector<u8>, 6> calculateIVRange(const std::array<u8, 6> &baseStats, const std::vector<std::array<u16, 6>> &stats,
+                                                    const std::vector<u8> &level, u8 nature, u8 characteristic, u8 hiddenPower);
 };
 
 #endif // IVCHECKER_HPP
