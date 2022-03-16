@@ -27,8 +27,8 @@
 #include <Core/Util/EncounterSlot.hpp>
 
 WildGenerator3::WildGenerator3(u32 initialAdvances, u32 maxAdvances, u16 tid, u16 sid, u8 genderRatio, Method method,
-                               const StateFilter &filter, bool rse) :
-    WildGenerator(initialAdvances, maxAdvances, tid, sid, genderRatio, method, filter), rse(rse)
+                               const StateFilter &filter, Game version) :
+    WildGenerator(initialAdvances, maxAdvances, tid, sid, genderRatio, method, filter), version(version)
 {
 }
 
@@ -39,10 +39,13 @@ std::vector<WildState> WildGenerator3::generate(u32 seed, const EncounterArea3 &
     PokeRNG rng(seed);
     rng.advance(initialAdvances + offset);
 
+    u8 unownSlot;
+    bool frlgUnown = encounterArea.frlgTanobyChambers() && ((version & Game::FRLG) != Game::None);
+
     u16 rate = encounterArea.getEncounterRate() * 16;
     // RockSmash/Surfing/Fishing encounters have different rng calls inside RSE Safari Zone,
     // so we set a flag to check if we're searching these kind of spreads
-    bool rseSafari = encounterArea.rseSafariZone() && rse;
+    bool rseSafari = encounterArea.rseSafariZone() && ((version & Game::RSE) != Game::None);
     bool rock = rate == 2880;
 
     bool cuteCharmFlag = false;
@@ -121,8 +124,8 @@ std::vector<WildState> WildGenerator3::generate(u32 seed, const EncounterArea3 &
             go.advance(2);
             break;
         case Encounter::Grass:
-            go.next();
-            state.setEncounterSlot(EncounterSlot::hSlot(go.nextUShort(), encounter));
+            unownSlot = EncounterSlot::hSlot(go.nextUShort(), encounter);
+            state.setEncounterSlot(frlgUnown ? unownSlot : EncounterSlot::hSlot(go.nextUShort(), encounter));
             if (!filter.compareEncounterSlot(state))
             {
                 continue;
@@ -157,7 +160,10 @@ std::vector<WildState> WildGenerator3::generate(u32 seed, const EncounterArea3 &
 
         if (lead == Lead::None)
         {
-            state.setNature(go.nextUShort() % 25);
+            if (!frlgUnown)
+            {
+                state.setNature(go.nextUShort() % 25);
+            }
         }
         else if (lead == Lead::Synchronize)
         {
@@ -176,19 +182,38 @@ std::vector<WildState> WildGenerator3::generate(u32 seed, const EncounterArea3 &
             state.setNature(go.nextUShort() % 25);
         }
 
-        if (!filter.compareNature(state))
+        if (!frlgUnown && !filter.compareNature(state))
         {
             continue;
         }
 
         // Now search for a Method 124 PID that matches our hunt nature
         u32 pid;
-        do
+        if (!frlgUnown)
         {
-            u16 low = go.nextUShort();
-            u16 high = go.nextUShort();
-            pid = (high << 16) | low;
-        } while (pid % 25 != state.getNature() || (cuteCharmFlag && !cuteCharm(pid)));
+            do
+            {
+                u16 low = go.nextUShort();
+                u16 high = go.nextUShort();
+                pid = (high << 16) | low;
+            } while (pid % 25 != state.getNature() || (cuteCharmFlag && !cuteCharm(pid)));
+        }
+        else
+        {
+            do
+            {
+                u16 high = go.nextUShort();
+                u16 low = go.nextUShort();
+                pid = (high << 16) | low;
+            } while ((((pid & 0x3000000) >> 18) | ((pid & 0x30000) >> 12) | ((pid & 0x300) >> 6) | (pid & 0x3)) % 28
+                        != unownLetterSlotsMatrix[encounterArea.getLocation() % 100][unownSlot]);
+
+            state.setNature(pid % 25);
+            if (!filter.compareNature(state))
+            {
+                continue;
+            }
+        }
 
         state.setPID(pid);
         state.setAbility(pid & 1);

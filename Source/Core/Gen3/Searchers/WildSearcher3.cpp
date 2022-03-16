@@ -24,8 +24,8 @@
 #include <Core/RNG/LCRNG.hpp>
 #include <Core/Util/EncounterSlot.hpp>
 
-WildSearcher3::WildSearcher3(u16 tid, u16 sid, u8 genderRatio, Method method, const StateFilter &filter, bool rse) :
-    WildSearcher(tid, sid, genderRatio, method, filter), cache(method), rse(rse), searching(false), progress(0)
+WildSearcher3::WildSearcher3(u16 tid, u16 sid, u8 genderRatio, Method method, const StateFilter &filter, Game version) :
+    WildSearcher(tid, sid, genderRatio, method, filter), cache(method), version(version), searching(false), progress(0)
 {
 }
 
@@ -99,7 +99,7 @@ std::vector<WildState> WildSearcher3::search(u8 hp, u8 atk, u8 def, u8 spa, u8 s
 
     // RSE encounters have different rng calls inside Safari Zone,
     // so we set a flag to check if we're searching these kind of spreads
-    bool rseSafari = encounterArea.rseSafariZone() && rse;
+    bool rseSafari = encounterArea.rseSafariZone() && ((version & Game::RSE) != Game::None);
 
     auto seeds = cache.recoverLower16BitsIV(hp, atk, def, spa, spd, spe);
     for (const u32 val : seeds)

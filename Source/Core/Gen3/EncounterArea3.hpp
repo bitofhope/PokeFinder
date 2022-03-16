@@ -31,6 +31,7 @@ public:
     u8 calcLevel(u8 index) const;
     u8 getEncounterRate() const;
     bool rseSafariZone() const;
+    bool frlgTanobyChambers() const;
 };
 
 #endif // ENCOUNTERAREA3_HPP

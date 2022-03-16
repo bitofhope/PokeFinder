@@ -86,3 +86,20 @@ bool EncounterArea3::rseSafariZone() const
         return false;
     }
 }
+
+bool EncounterArea3::frlgTanobyChambers() const
+{
+    switch (location)
+    {
+    case 100: // Monean Chamber
+    case 101: // Liptoo Chamber
+    case 102: // Weepth Chamber
+    case 103: // Dilford Chamber
+    case 104: // Scufib Chamber
+    case 105: // Rixy Chamber
+    case 106: // Viapois Chamber
+        return true;
+    default:
+        return false;
+    }
+}
