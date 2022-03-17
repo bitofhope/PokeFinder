@@ -26,7 +26,7 @@
 #include <Core/RNG/RNGCache.hpp>
 #include <mutex>
 
-class WildState;
+class WildState3;
 
 class WildSearcher3 : public WildSearcher
 {
@@ -35,7 +35,7 @@ public:
     void setEncounterArea(const EncounterArea3 &encounterArea);
     void startSearch(const std::array<u8, 6> &min, const std::array<u8, 6> &max);
     void cancelSearch();
-    std::vector<WildState> getResults();
+    std::vector<WildState3> getResults();
     int getProgress() const;
 
 private:
@@ -45,10 +45,10 @@ private:
 
     bool searching;
     int progress;
-    std::vector<WildState> results;
+    std::vector<WildState3> results;
     std::mutex mutex;
 
-    std::vector<WildState> search(u8 hp, u8 atk, u8 def, u8 spa, u8 spd, u8 spe) const;
+    std::vector<WildState3> search(u8 hp, u8 atk, u8 def, u8 spa, u8 spd, u8 spe) const;
 };
 
 #endif // WILDSEARCHER3_HPP

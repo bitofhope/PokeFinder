@@ -465,6 +465,48 @@ void Wild3::generatorLocationIndexChanged(int index)
     if (index >= 0)
     {
         updatePokemonGenerator();
+
+        if ((currentProfile->getVersion() & Game::FRLG) != Game::None &&
+                encounterGenerator[ui->comboBoxGeneratorLocation->currentData().toInt()].frlgTanobyChambers())
+        {
+            std::vector<std::string> t[7] = {{ "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "?" },
+                                             { "C", "C", "C", "D", "D", "D", "H", "H", "H", "U", "U", "O" },
+                                             { "N", "N", "N", "N", "S", "S", "S", "S", "I", "I", "E", "E" },
+                                             { "P", "P", "L", "L", "J", "J", "R", "R", "R", "Q", "Q", "Q" },
+                                             { "Y", "Y", "T", "T", "G", "G", "G", "F", "F", "F", "K", "K" },
+                                             { "V", "V", "V", "W", "W", "W", "X", "X", "M", "M", "B", "B" },
+                                             { "Z", "Z", "Z", "Z", "Z", "Z", "Z", "Z", "Z", "Z", "Z", "!" }};
+            ui->filterGenerator->setEncounterSlots(
+                        t[encounterGenerator[ui->comboBoxGeneratorLocation->currentData().toInt()].getLocation() % 100]);
+        }
+        else
+        {
+            std::vector<std::string> t;
+            Encounter encounter = static_cast<Encounter>(ui->comboBoxGeneratorEncounter->currentData().toInt());
+
+            switch (encounter)
+            {
+            case Encounter::Grass:
+            case Encounter::SafariZone:
+                t = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11" };
+                break;
+            case Encounter::RockSmash:
+            case Encounter::Surfing:
+            case Encounter::SuperRod:
+                t = { "0", "1", "2", "3", "4" };
+                break;
+            case Encounter::OldRod:
+                t = { "0", "1" };
+                break;
+            case Encounter::GoodRod:
+                t = { "0", "1", "2" };
+                break;
+            default:
+                break;
+            }
+
+            ui->filterGenerator->setEncounterSlots(t);
+        }
     }
 }
 

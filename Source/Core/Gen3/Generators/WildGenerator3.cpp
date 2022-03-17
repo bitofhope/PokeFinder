@@ -22,7 +22,7 @@
 #include <Core/Enum/Lead.hpp>
 #include <Core/Enum/Method.hpp>
 #include <Core/Gen3/EncounterArea3.hpp>
-#include <Core/Parents/States/WildState.hpp>
+#include <Core/Gen3/States/WildState3.hpp>
 #include <Core/RNG/LCRNG.hpp>
 #include <Core/Util/EncounterSlot.hpp>
 
@@ -32,9 +32,9 @@ WildGenerator3::WildGenerator3(u32 initialAdvances, u32 maxAdvances, u16 tid, u1
 {
 }
 
-std::vector<WildState> WildGenerator3::generate(u32 seed, const EncounterArea3 &encounterArea) const
+std::vector<WildState3> WildGenerator3::generate(u32 seed, const EncounterArea3 &encounterArea) const
 {
-    std::vector<WildState> states;
+    std::vector<WildState3> states;
 
     PokeRNG rng(seed);
     rng.advance(initialAdvances + offset);
@@ -85,7 +85,7 @@ std::vector<WildState> WildGenerator3::generate(u32 seed, const EncounterArea3 &
 
     for (u32 cnt = 0; cnt <= maxAdvances; cnt++, rng.next())
     {
-        WildState state(initialAdvances + cnt);
+        WildState3 state(initialAdvances + cnt, frlgUnown, encounterArea.getLocation());
         PokeRNG go(rng.getSeed());
 
         switch (encounter)
@@ -206,7 +206,7 @@ std::vector<WildState> WildGenerator3::generate(u32 seed, const EncounterArea3 &
                 u16 low = go.nextUShort();
                 pid = (high << 16) | low;
             } while ((((pid & 0x3000000) >> 18) | ((pid & 0x30000) >> 12) | ((pid & 0x300) >> 6) | (pid & 0x3)) % 28
-                        != unownLetterSlotsMatrix[encounterArea.getLocation() % 100][unownSlot]);
+                        != unownLetterSlots[encounterArea.getLocation() % 100][unownSlot]);
 
             state.setNature(pid % 25);
             if (!filter.compareNature(state))

@@ -20,7 +20,7 @@
 #include "WildSearcher3.hpp"
 #include <Core/Enum/Method.hpp>
 #include <Core/Parents/Slot.hpp>
-#include <Core/Parents/States/WildState.hpp>
+#include <Core/Gen3/States/WildState3.hpp>
 #include <Core/RNG/LCRNG.hpp>
 #include <Core/Util/EncounterSlot.hpp>
 
@@ -73,7 +73,7 @@ void WildSearcher3::cancelSearch()
     searching = false;
 }
 
-std::vector<WildState> WildSearcher3::getResults()
+std::vector<WildState3> WildSearcher3::getResults()
 {
     std::lock_guard<std::mutex> guard(mutex);
     auto data = std::move(results);
@@ -85,11 +85,11 @@ int WildSearcher3::getProgress() const
     return progress;
 }
 
-std::vector<WildState> WildSearcher3::search(u8 hp, u8 atk, u8 def, u8 spa, u8 spd, u8 spe) const
+std::vector<WildState3> WildSearcher3::search(u8 hp, u8 atk, u8 def, u8 spa, u8 spd, u8 spe) const
 {
-    std::vector<WildState> states;
+    std::vector<WildState3> states;
 
-    WildState state;
+    WildState3 state;
     state.setIVs(hp, atk, def, spa, spd, spe);
     state.calculateHiddenPower();
     if (!filter.compareHiddenPower(state))

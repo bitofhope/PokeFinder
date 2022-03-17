@@ -20,10 +20,10 @@
 #ifndef WILD3MODEL_HPP
 #define WILD3MODEL_HPP
 
-#include <Core/Parents/States/WildState.hpp>
+#include <Core/Gen3/States/WildState3.hpp>
 #include <Forms/Models/TableModel.hpp>
 
-class WildGeneratorModel3 : public TableModel<WildState>
+class WildGeneratorModel3 : public TableModel<WildState3>
 {
     Q_OBJECT
 public:
@@ -35,9 +35,16 @@ public:
 private:
     QStringList header = { tr("Advances"), tr("Slot"), tr("Level"), tr("PID"), tr("Shiny"), tr("Nature"), tr("Ability"), tr("HP"),
                            tr("Atk"),      tr("Def"),  tr("SpA"),   tr("SpD"), tr("Spe"),   tr("Hidden"), tr("Power"),   tr("Gender") };
+    QStringList unownLetterSlots[7] = {{ "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "?" },
+                                       { "C", "C", "C", "D", "D", "D", "H", "H", "H", "U", "U", "O" },
+                                       { "N", "N", "N", "N", "S", "S", "S", "S", "I", "I", "E", "E" },
+                                       { "P", "P", "L", "L", "J", "J", "R", "R", "R", "Q", "Q", "Q" },
+                                       { "Y", "Y", "T", "T", "G", "G", "G", "F", "F", "F", "K", "K" },
+                                       { "V", "V", "V", "W", "W", "W", "X", "X", "M", "M", "B", "B" },
+                                       { "Z", "Z", "Z", "Z", "Z", "Z", "Z", "Z", "Z", "Z", "Z", "!" }};
 };
 
-class WildSearcherModel3 : public TableModel<WildState>
+class WildSearcherModel3 : public TableModel<WildState3>
 {
     Q_OBJECT
 public:
@@ -50,6 +57,13 @@ public:
 private:
     QStringList header = { tr("Seed"), tr("Lead"), tr("Slot"), tr("Level"), tr("PID"), tr("Shiny"),  tr("Nature"), tr("Ability"), tr("HP"),
                            tr("Atk"),  tr("Def"),  tr("SpA"),  tr("SpD"),   tr("Spe"), tr("Hidden"), tr("Power"),  tr("Gender") };
+    QStringList unownLetterSlots[7] = {{ "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "?" },
+                                       { "C", "C", "C", "D", "D", "D", "H", "H", "H", "U", "U", "O" },
+                                       { "N", "N", "N", "N", "S", "S", "S", "S", "I", "I", "E", "E" },
+                                       { "P", "P", "L", "L", "J", "J", "R", "R", "R", "Q", "Q", "Q" },
+                                       { "Y", "Y", "T", "T", "G", "G", "G", "F", "F", "F", "K", "K" },
+                                       { "V", "V", "V", "W", "W", "W", "X", "X", "M", "M", "B", "B" },
+                                       { "Z", "Z", "Z", "Z", "Z", "Z", "Z", "Z", "Z", "Z", "Z", "!" }};
 };
 
 #endif // WILD3MODEL_HPP

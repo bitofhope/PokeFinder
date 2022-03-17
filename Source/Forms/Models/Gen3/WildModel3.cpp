@@ -21,7 +21,7 @@
 #include <Core/Enum/Lead.hpp>
 #include <Core/Util/Translator.hpp>
 
-WildGeneratorModel3::WildGeneratorModel3(QObject *parent) : TableModel<WildState>(parent)
+WildGeneratorModel3::WildGeneratorModel3(QObject *parent) : TableModel<WildState3>(parent)
 {
 }
 
@@ -41,7 +41,14 @@ QVariant WildGeneratorModel3::data(const QModelIndex &index, int role) const
         case 0:
             return state.getAdvances();
         case 1:
-            return state.getEncounterSlot();
+            if (!state.getUnown())
+            {
+                return state.getEncounterSlot();
+            }
+            else
+            {
+                return unownLetterSlots[state.getChamber()][state.getEncounterSlot()];
+            }
         case 2:
             return state.getLevel();
         case 3:
@@ -82,7 +89,7 @@ QVariant WildGeneratorModel3::headerData(int section, Qt::Orientation orientatio
     return QVariant();
 }
 
-WildSearcherModel3::WildSearcherModel3(QObject *parent) : TableModel<WildState>(parent)
+WildSearcherModel3::WildSearcherModel3(QObject *parent) : TableModel<WildState3>(parent)
 {
 }
 
@@ -95,42 +102,42 @@ void WildSearcherModel3::sort(int column, Qt::SortOrder order)
         switch (column)
         {
         case 0:
-            std::sort(model.begin(), model.end(), [flag](const WildState &state1, const WildState &state2) {
+            std::sort(model.begin(), model.end(), [flag](const WildState3 &state1, const WildState3 &state2) {
                 return flag ? state1.getSeed() < state2.getSeed() : state1.getSeed() > state2.getSeed();
             });
             break;
         case 1:
-            std::sort(model.begin(), model.end(), [flag](const WildState &state1, const WildState &state2) {
+            std::sort(model.begin(), model.end(), [flag](const WildState3 &state1, const WildState3 &state2) {
                 return flag ? state1.getLead() < state2.getLead() : state1.getLead() > state2.getLead();
             });
             break;
         case 2:
-            std::sort(model.begin(), model.end(), [flag](const WildState &state1, const WildState &state2) {
+            std::sort(model.begin(), model.end(), [flag](const WildState3 &state1, const WildState3 &state2) {
                 return flag ? state1.getEncounterSlot() < state2.getEncounterSlot() : state1.getEncounterSlot() > state2.getEncounterSlot();
             });
             break;
         case 3:
-            std::sort(model.begin(), model.end(), [flag](const WildState &state1, const WildState &state2) {
+            std::sort(model.begin(), model.end(), [flag](const WildState3 &state1, const WildState3 &state2) {
                 return flag ? state1.getLevel() < state2.getLevel() : state1.getLevel() > state2.getLevel();
             });
             break;
         case 4:
-            std::sort(model.begin(), model.end(), [flag](const WildState &state1, const WildState &state2) {
+            std::sort(model.begin(), model.end(), [flag](const WildState3 &state1, const WildState3 &state2) {
                 return flag ? state1.getPID() < state2.getPID() : state1.getPID() > state2.getPID();
             });
             break;
         case 5:
-            std::sort(model.begin(), model.end(), [flag](const WildState &state1, const WildState &state2) {
+            std::sort(model.begin(), model.end(), [flag](const WildState3 &state1, const WildState3 &state2) {
                 return flag ? state1.getShiny() < state2.getShiny() : state1.getShiny() > state2.getShiny();
             });
             break;
         case 6:
-            std::sort(model.begin(), model.end(), [flag](const WildState &state1, const WildState &state2) {
+            std::sort(model.begin(), model.end(), [flag](const WildState3 &state1, const WildState3 &state2) {
                 return flag ? state1.getNature() < state2.getNature() : state1.getNature() > state2.getNature();
             });
             break;
         case 7:
-            std::sort(model.begin(), model.end(), [flag](const WildState &state1, const WildState &state2) {
+            std::sort(model.begin(), model.end(), [flag](const WildState3 &state1, const WildState3 &state2) {
                 return flag ? state1.getAbility() < state2.getAbility() : state1.getAbility() > state2.getAbility();
             });
             break;
@@ -140,23 +147,23 @@ void WildSearcherModel3::sort(int column, Qt::SortOrder order)
         case 11:
         case 12:
         case 13:
-            std::sort(model.begin(), model.end(), [flag, column](const WildState &state1, const WildState &state2) {
+            std::sort(model.begin(), model.end(), [flag, column](const WildState3 &state1, const WildState3 &state2) {
                 return flag ? state1.getIV(static_cast<u8>(column - 8)) < state2.getIV(static_cast<u8>(column - 8))
                             : state1.getIV(static_cast<u8>(column - 8)) > state2.getIV(static_cast<u8>(column - 8));
             });
             break;
         case 14:
-            std::sort(model.begin(), model.end(), [flag](const WildState &state1, const WildState &state2) {
+            std::sort(model.begin(), model.end(), [flag](const WildState3 &state1, const WildState3 &state2) {
                 return flag ? state1.getHidden() < state2.getHidden() : state1.getHidden() > state2.getHidden();
             });
             break;
         case 15:
-            std::sort(model.begin(), model.end(), [flag](const WildState &state1, const WildState &state2) {
+            std::sort(model.begin(), model.end(), [flag](const WildState3 &state1, const WildState3 &state2) {
                 return flag ? state1.getPower() < state2.getPower() : state1.getPower() > state2.getPower();
             });
             break;
         case 16:
-            std::sort(model.begin(), model.end(), [flag](const WildState &state1, const WildState &state2) {
+            std::sort(model.begin(), model.end(), [flag](const WildState3 &state1, const WildState3 &state2) {
                 return flag ? state1.getGender() < state2.getGender() : state1.getGender() > state2.getGender();
             });
             break;
