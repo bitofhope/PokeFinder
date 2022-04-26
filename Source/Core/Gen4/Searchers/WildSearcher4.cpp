@@ -61,6 +61,7 @@ WildSearcher4::WildSearcher4(u32 minAdvance, u32 maxAdvance, u32 minDelay, u32 m
     maxDelay(maxDelay),
     minDelay(minDelay),
     thresh(encounterArea.getRate()),
+    safari(encounterArea.safariZone(version)),
     searching(false),
     shiny(shiny)
 {
@@ -419,8 +420,21 @@ std::vector<WildSearcherState4> WildSearcher4::searchMethodK(u8 hp, u8 atk, u8 d
 
             if (rng.nextUShort(3) != 0)
             {
-                u16 levelRand = grass ? 0 : rng.nextUShort();
-                u8 encounterSlot = EncounterSlot::jSlot(rng.nextUShort(100), encounter);
+                u8 encounterSlot;
+                u16 levelRand;
+                if (safari)
+                {
+                    encounterSlot = rng.nextUShort(10);
+                }
+                else if (grass)
+                {
+                    encounterSlot = EncounterSlot::kSlot(rng.nextUShort(100), encounter);
+                }
+                else
+                {
+                    levelRand = rng.nextUShort();
+                    encounterSlot = EncounterSlot::kSlot(rng.nextUShort(100), encounter);
+                }
 
                 const Slot &slot = encounterArea.getPokemon(encounterSlot);
                 const PersonalInfo *info = slot.getInfo();
@@ -441,7 +455,7 @@ std::vector<WildSearcherState4> WildSearcher4::searchMethodK(u8 hp, u8 atk, u8 d
                 }
 
                 u8 level;
-                if (grass)
+                if (grass || safari)
                 {
                     level = encounterArea.EncounterArea::calculateLevel(encounterSlot);
                 }
@@ -490,7 +504,11 @@ std::vector<WildSearcherState4> WildSearcher4::searchMethodK(u8 hp, u8 atk, u8 d
                 case Lead::SuctionCups:
                     if ((nextRNG % 25) == nature)
                     {
-                        if (grass)
+                        if (safari)
+                        {
+                            encounterSlot = nextRNG2 % 10;
+                        }
+                        else if (grass)
                         {
                             encounterSlot = EncounterSlot::kSlot(nextRNG2 % 100, encounter);
                         }
@@ -505,7 +523,11 @@ std::vector<WildSearcherState4> WildSearcher4::searchMethodK(u8 hp, u8 atk, u8 d
                 case Lead::Synchronize:
                     if ((nextRNG % 2) == 0)
                     {
-                        if (grass)
+                        if (safari)
+                        {
+                            encounterSlot = nextRNG2 % 10;
+                        }
+                        else if (grass)
                         {
                             encounterSlot = EncounterSlot::kSlot(nextRNG2 % 100, encounter);
                         }
@@ -518,7 +540,11 @@ std::vector<WildSearcherState4> WildSearcher4::searchMethodK(u8 hp, u8 atk, u8 d
                     }
                     else if ((nextRNG2 % 2) == 1 && (nextRNG % 25) == nature)
                     {
-                        if (grass)
+                        if (safari)
+                        {
+                            encounterSlot = test.nextUShort(10);
+                        }
+                        else if (grass)
                         {
                             encounterSlot = EncounterSlot::kSlot(test.nextUShort(100), encounter);
                         }
@@ -535,7 +561,7 @@ std::vector<WildSearcherState4> WildSearcher4::searchMethodK(u8 hp, u8 atk, u8 d
                     if ((nextRNG % 25) == nature)
                     {
                         u16 encounterRand;
-                        if (grass)
+                        if (grass || safari)
                         {
                             encounterRand = nextRNG2;
                         }
@@ -551,7 +577,7 @@ std::vector<WildSearcherState4> WildSearcher4::searchMethodK(u8 hp, u8 atk, u8 d
                         }
                         else
                         {
-                            encounterSlot = EncounterSlot::jSlot(encounterRand % 100, encounter);
+                            encounterSlot = EncounterSlot::kSlot(encounterRand % 100, encounter);
                         }
                         valid = true;
                     }
@@ -560,14 +586,18 @@ std::vector<WildSearcherState4> WildSearcher4::searchMethodK(u8 hp, u8 atk, u8 d
                     if ((nextRNG % 25) == nature)
                     {
                         force = (nextRNG2 % 2) != 0;
-                        if (grass)
+                        if (safari)
                         {
-                            encounterSlot = EncounterSlot::jSlot(test.nextUShort(100), encounter);
+                            encounterSlot = test.nextUShort(10);
+                        }
+                        else if (grass)
+                        {
+                            encounterSlot = EncounterSlot::kSlot(test.nextUShort(100), encounter);
                         }
                         else
                         {
                             levelRand = test.nextUShort();
-                            encounterSlot = EncounterSlot::jSlot(test.nextUShort(100), encounter);
+                            encounterSlot = EncounterSlot::kSlot(test.nextUShort(100), encounter);
                         }
                         valid = true;
                     }
