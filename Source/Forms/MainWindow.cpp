@@ -207,7 +207,7 @@ QByteArray MainWindow::downloadFile(const QString &url)
 {
     QNetworkAccessManager manager;
     QNetworkRequest request(url);
-    std::unique_ptr<QNetworkReply> reply(manager.get(request));
+    QScopedPointer<QNetworkReply> reply(manager.get(request));
 
     QEventLoop loop;
     connect(reply.get(), &QNetworkReply::finished, &loop, &QEventLoop::quit);
